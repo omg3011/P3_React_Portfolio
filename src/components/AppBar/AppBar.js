@@ -19,6 +19,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import List from "@mui/material/List";
 
 import { styled, useTheme } from "@mui/material/styles";
+import { Backdrop } from "@mui/material";
 
 const pages = ["About", "Portfolio", "Contact"];
 const drawerWidth = 240;
@@ -59,29 +60,6 @@ const ResponsiveAppBar = () => {
               P<Typography>ortfolio.</Typography>
             </Typography>
 
-            {/* Mobile: Hamburger */}
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                onClick={handleDrawerOpen}
-                edge="start"
-                sx={{ mr: 2, ...(open && { display: "none" }) }}
-              >
-                <MenuIcon />
-              </IconButton>
-            </Box>
-
-            {/* Mobile: Portflio. */}
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
-            >
-              P<Typography>ortfolio.</Typography>
-            </Typography>
-
             {/* PC: Nav Elements */}
             <Box
               sx={{
@@ -99,6 +77,43 @@ const ResponsiveAppBar = () => {
                   {page}
                 </Button>
               ))}
+            </Box>
+
+            {/* Mobile */}
+            <Box
+              sx={{
+                width: "100%",
+                display: { xs: "flex", md: "none" },
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              {/* Mobile: Hamburger */}
+              <Box>
+                <Backdrop open={open} />
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  onClick={handleDrawerOpen}
+                  edge="start"
+                  sx={{ ...(open && { display: "none" }) }}
+                >
+                  <MenuIcon />
+                </IconButton>
+              </Box>
+
+              {/* Mobile: Portflio. */}
+              <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                sx={{ display: "inline-flex" }}
+              >
+                P<Typography>ortfolio.</Typography>
+              </Typography>
+
+              {/* Mobile: Empty to make space-around works */}
+              <Box></Box>
             </Box>
           </Toolbar>
         </Container>
