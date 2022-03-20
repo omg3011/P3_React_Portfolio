@@ -19,9 +19,9 @@ import MailIcon from "@mui/icons-material/Mail";
 import List from "@mui/material/List";
 
 import { styled, useTheme } from "@mui/material/styles";
-import { Backdrop } from "@mui/material";
+import { Backdrop, Stack } from "@mui/material";
 
-const pages = ["About", "Portfolio", "Contact"];
+const pages = ["About", "Showcase", "Portfolio", "Contact"];
 const drawerWidth = 240;
 
 const DrawerHeader = styled("div")(({ theme }) => ({
@@ -47,42 +47,65 @@ const ResponsiveAppBar = () => {
 
   return (
     <Box>
-      <AppBar position="static">
+      <AppBar
+        position="static"
+        style={{ background: "#2E3B55", height: "7vh" }}
+      >
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            {/* PC: Portfolio. */}
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
-            >
-              P<Typography>ortfolio.</Typography>
-            </Typography>
-
-            {/* PC: Nav Elements */}
             <Box
               sx={{
-                flexGrow: 1,
+                width: "100%",
+                height: "100%",
                 display: { xs: "none", md: "flex" },
-                justifyContent: "end",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
               }}
             >
-              {pages.map((page) => (
-                <Button
-                  key={page}
-                  onClick={handleDrawerClose}
-                  sx={{ my: 2, color: "white", display: "block" }}
+              {/* PC: Portfolio. */}
+              <Box>
+                <Typography
+                  variant="h6"
+                  noWrap
+                  component="div"
+                  sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
                 >
-                  {page}
+                  P<Typography>ortfolio.</Typography>
+                </Typography>
+              </Box>
+
+              {/* PC: Nav Elements */}
+              <Stack
+                direction="row"
+                divider={<Divider orientation="vertical" flexItem />}
+                spacing={2}
+              >
+                {pages.map((page) =>
+                  page === "Contact" ? null : (
+                    <Button
+                      key={page}
+                      onClick={handleDrawerClose}
+                      sx={{ color: "white" }}
+                    >
+                      {page}
+                    </Button>
+                  )
+                )}
+              </Stack>
+
+              <Box>
+                <Button onClick={handleDrawerClose} sx={{ color: "white" }}>
+                  Contact
                 </Button>
-              ))}
+              </Box>
             </Box>
 
             {/* Mobile */}
             <Box
               sx={{
                 width: "100%",
+                height: "100%",
                 display: { xs: "flex", md: "none" },
                 justifyContent: "space-between",
                 alignItems: "center",
